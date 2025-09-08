@@ -692,7 +692,7 @@ hr{
 
 .key-btn-left {
   left: -5%;
-  top: 10%; /* start top */
+  top: 10% !important; /* start top */
 }
 
 .key-btn-right {

@@ -107,6 +107,7 @@ window.addEventListener('scroll', () => {
 
 
 ///animation trigger
+
 // Select all fade-in and fade-in-up elements
 const elements = document.querySelectorAll('.fade-in, .fade-in-up');
 
@@ -121,3 +122,35 @@ const observer = new IntersectionObserver((entries, observer) => {
 
 // Observe each element
 elements.forEach(el => observer.observe(el));
+
+
+// Key Section btn scroll
+// Select the buttons
+const leftBtn = document.querySelector('.key-btn-left');
+const rightBtn = document.querySelector('.key-btn-right');
+
+// Save their initial CSS positions
+const leftBtnTop = leftBtn.offsetTop;
+const rightBtnTop = rightBtn.offsetTop;
+
+// Max movement in pixels (10% of parent container or screen)
+const maxMove = leftBtn.parentElement.offsetHeight * 0.22; // 10% of section height
+
+window.addEventListener('scroll', () => {
+  // Get the section top and scroll
+  const section = document.querySelector('.key-img');
+  const sectionTop = section.getBoundingClientRect().top;
+  const sectionHeight = section.offsetHeight;
+  const windowHeight = window.innerHeight;
+
+  // Calculate how much of the section is visible (0 → 1)
+  let visible = 1 - (sectionTop / windowHeight);
+  if (visible < 0) visible = 0;
+  if (visible > 1) visible = 1;
+
+  // Move left button down
+  leftBtn.style.transform = `translateY(${visible * maxMove}px)`;
+
+  // Move right button up
+  rightBtn.style.transform = `translateY(-${visible * maxMove}px)`;
+});
