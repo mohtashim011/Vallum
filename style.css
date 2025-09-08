@@ -687,7 +687,8 @@ hr{
   text-decoration: none;
   line-height: 1em;
   position: absolute;
-  transition: transform 0.9s linear;
+  /* transition: transform 0.9s linear; */
+  transition: transform 0.3s ease-out;
 }
 
 .key-btn-left {
