@@ -125,7 +125,6 @@ elements.forEach(el => observer.observe(el));
 
 
 // Key Section btn scroll
-
 // Select buttons
 const leftBtn = document.querySelector('.key-btn-left');
 const rightBtn = document.querySelector('.key-btn-right');
@@ -134,19 +133,22 @@ const section = document.querySelector('.key-img');
 // Maximum movement (10% of section height)
 const maxMove = section.offsetHeight * 0.1;
 
+// Get section top relative to document
+const sectionTop = section.offsetTop;
+const sectionHeight = section.offsetHeight;
+
 window.addEventListener('scroll', () => {
-  const sectionRect = section.getBoundingClientRect();
+  const scrollY = window.scrollY;
   const windowHeight = window.innerHeight;
 
-  // Check if section is visible in viewport
-  if (sectionRect.bottom > 0 && sectionRect.top < windowHeight) {
-    // Calculate scroll progress through section (0 → 1)
-    let progress = (windowHeight - sectionRect.top) / (windowHeight + sectionRect.height);
-    if (progress < 0) progress = 0;
-    if (progress > 1) progress = 1;
+  // Calculate scroll progress through section (0 = section top at viewport bottom, 1 = section top at viewport top)
+  let progress = (scrollY + windowHeight - sectionTop) / (windowHeight + sectionHeight);
+  
+  // Clamp progress between 0 and 1
+  if (progress < 0) progress = 0;
+  if (progress > 1) progress = 1;
 
-    // Move buttons
-    leftBtn.style.transform = `translateY(${progress * maxMove}px)`;   // down
-    rightBtn.style.transform = `translateY(${-progress * maxMove}px)`; // up
-  }
+  // Apply transform
+  leftBtn.style.transform = `translateY(${progress * maxMove}px)`;   // down
+  rightBtn.style.transform = `translateY(${-progress * maxMove}px)`; // up
 });

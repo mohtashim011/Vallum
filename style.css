@@ -540,6 +540,10 @@ text-align: center;
 .text-bold{
   font-weight: 700;
 }
+.text-bold-white{
+  font-weight: 700;
+  color: #ffff;
+}
 .fea-carousel{
   display: flex;
   flex-direction: row;
