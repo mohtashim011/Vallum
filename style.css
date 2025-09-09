@@ -795,8 +795,8 @@ text-transform: uppercase;
   position: absolute;
   top: 110%;
   transform: translateY(-50%);
-  background: linear-gradient(150deg, #F4F2EF 17%, #ABD4DB 32%, #5FC2EB 71%, #C3F4FC 100%);
-  color: #000;
+  background: none;
+  color: #ffffff;
   border: none;
   padding: 10px 16px;
   cursor: pointer;
@@ -810,21 +810,29 @@ text-transform: uppercase;
 
 /* Position left/right */
 .carousel-btn.prev {
-  left: 75%;  /* adjust spacing */
+  left: 90%;  /* adjust spacing */
   display: flex;
   width: 50px;
   height: 50px;
+  font-size: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .carousel-btn.next {
-  right: 10%; /* adjust spacing */
+  right: 0%; /* adjust spacing */
     width: 50px;
   height: 50px;
+  font-size: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 
 @media (max-width: 425px) {
 .carousel-btn.prev {
-    left: 58% !important;}
+    left: 78% !important;}
 
     .car-icon-box {
     width: 60% !important;
@@ -833,7 +841,7 @@ text-transform: uppercase;
 }
 @media (max-width: 321px) {
     .carousel-btn.prev {
-        left: 50% !important;
+        left: 70% !important;
     }
 }
 }
@@ -1693,34 +1701,39 @@ margin: 0 auto;
   text-align: left;
   margin: 0;
 }
-
 .cta-main-btn {
   background: #1A1A1A;
-  border: none;
+  border: 2px solid #1A1A1A;
   font-size: 18px;
   font-weight: 700;
-  width: fit-content;
   color: #ffffff;
   display: flex;
   justify-content: center;
-  flex-direction: row;
   align-items: center;
   padding: 13.5px 26px;
   border-radius: 40px;
   gap: 10px;
   text-decoration: none;
   line-height: 1em;
-  border: 2px solid #1A1A1A;
 
-  /* 👇 smooth movement */
-  transition: background-position 0.4s ease-in-out;
+  /* Smooth transition for background, color, and border */
+  transition: background-color 0.4s ease, color 0.4s ease, border-color 0.4s ease;
 }
 
 .cta-main-btn img {
   width: 7px;
   filter: invert(1);
+  transition: filter 0.4s ease; /* optional: smooth icon change if needed */
 }
 
+.cta-main-btn:hover {
+  color: #1A1A1A;
+  background-color: transparent;
+  border-color: #1A1A1A;
+}
+.cta-main-btn:hover img {
+  filter: invert(0); /* smooth transition to normal color */
+}
 @media (max-width: 1024px) {
   .cta-main-btn{
     font-size: 16px !important;
