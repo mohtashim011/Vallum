@@ -1,3 +1,35 @@
+// Mobile and Tab Header 
+document.addEventListener("DOMContentLoaded", () => {
+  const toggleBtn = document.querySelector(".menu-toggle");
+  const mobileMenu = document.querySelector(".mobile-menu");
+  const closeBtn = document.querySelector(".menu-close"); // new close button
+
+  // Open/close menu with toggle button
+  toggleBtn.addEventListener("click", () => {
+    mobileMenu.classList.toggle("active");
+    toggleBtn.textContent = mobileMenu.classList.contains("active") ? "×" : "☰";
+  });
+
+  // Close with dedicated close button
+  if (closeBtn) {
+    closeBtn.addEventListener("click", () => {
+      mobileMenu.classList.remove("active");
+      toggleBtn.textContent = "☰";
+    });
+  }
+
+  // Close when clicking a link
+  mobileMenu.querySelectorAll("a").forEach(link => {
+    link.addEventListener("click", () => {
+      mobileMenu.classList.remove("active");
+      toggleBtn.textContent = "☰";
+    });
+  });
+});
+
+
+
+
 // --- Button movement on scroll ---
   const slider = document.querySelector(".icon-box");
 
@@ -125,33 +157,45 @@ elements.forEach(el => observer.observe(el));
 
 
 // Key Section btn scroll
-// Select buttons
-const leftBtn = document.querySelector('.key-btn-left');
-const rightBtn = document.querySelector('.key-btn-right');
-const section = document.querySelector('.key-img');
+document.addEventListener("DOMContentLoaded", () => {
+  const leftBtn = document.querySelector('.key-btn-left');
+  const rightBtn = document.querySelector('.key-btn-right');
+  const section = document.querySelector('.key-img');
 
-// Maximum movement (10% of section height)
-const maxMove = section.offsetHeight * 0.1;
+  if (!leftBtn || !rightBtn || !section) {
+    console.error("Required elements not found!");
+    return;
+  }
 
-// Get section top relative to document
-const sectionTop = section.offsetTop;
-const sectionHeight = section.offsetHeight;
+  function updateButtonPosition() {
+    const rect = section.getBoundingClientRect();
+    const windowHeight = window.innerHeight;
 
-window.addEventListener('scroll', () => {
-  const scrollY = window.scrollY;
-  const windowHeight = window.innerHeight;
+    // progress 0 → section top at bottom, 1 → section top at top
+    let progress = 1 - rect.top / windowHeight;
+    progress = Math.max(0, Math.min(1, progress));
 
-  // Calculate scroll progress through section (0 = section top at viewport bottom, 1 = section top at viewport top)
-  let progress = (scrollY + windowHeight - sectionTop) / (windowHeight + sectionHeight);
-  
-  // Clamp progress between 0 and 1
-  if (progress < 0) progress = 0;
-  if (progress > 1) progress = 1;
+    const maxMove = section.offsetHeight * 0.1;
 
-  // Apply transform
-  leftBtn.style.transform = `translateY(${progress * maxMove}px)`;   // down
-  rightBtn.style.transform = `translateY(${-progress * maxMove}px)`; // up
+    leftBtn.style.transform = `translateY(${progress * maxMove}px)`;
+    rightBtn.style.transform = `translateY(${-progress * maxMove}px)`;
+  }
+
+  // Initial update in case page is refreshed mid-scroll
+  updateButtonPosition();
+
+  // Update continuously
+  function animate() {
+    updateButtonPosition();
+    requestAnimationFrame(animate);
+  }
+
+  animate();
+
+  // Update maxMove on resize
+  window.addEventListener('resize', updateButtonPosition);
 });
+
 
 
 
@@ -166,4 +210,120 @@ document.addEventListener("DOMContentLoaded", () => {
       track.appendChild(clone);
     });
   }
+});
+
+
+
+// for carousal movement 
+
+document.addEventListener("DOMContentLoaded", function () {
+  const carousel = document.querySelector(".icon-box");
+
+  // Create buttons
+  const prevBtn = document.createElement("button");
+  prevBtn.innerHTML = "‹";
+  prevBtn.className = "carousel-btn prev";
+
+  const nextBtn = document.createElement("button");
+  nextBtn.innerHTML = "›";
+  nextBtn.className = "carousel-btn next";
+
+  // Insert into DOM
+  carousel.parentNode.insertBefore(prevBtn, carousel);
+  carousel.parentNode.appendChild(nextBtn);
+
+  // Get one card width (including gap)
+  const cardWidth = carousel.querySelector(".car-icon-box").offsetWidth + 20;
+
+  // Add listeners
+  nextBtn.addEventListener("click", () => {
+    carousel.scrollBy({ left: cardWidth, behavior: "smooth" });
+  });
+  prevBtn.addEventListener("click", () => {
+    carousel.scrollBy({ left: -cardWidth, behavior: "smooth" });
+  });
+});
+
+
+
+//counter
+
+document.addEventListener('DOMContentLoaded', () => {
+  const counters = document.querySelectorAll('.counter-num');
+
+  function animateCounter(el, target, duration = 2000) {
+    const start = 0;
+    const startTime = performance.now();
+
+    function step(now) {
+      const elapsed = now - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+      const value = Math.floor(progress * (target - start) + start);
+      el.textContent = value;
+      if (progress < 1) {
+        requestAnimationFrame(step);
+      } else {
+        el.textContent = target; // exact end
+      }
+    }
+    requestAnimationFrame(step);
+  }
+
+  // Trigger when visible
+  const obs = new IntersectionObserver((entries, observer) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const el = entry.target;
+        const countTo = parseInt(el.dataset.count, 10);
+        if (!isNaN(countTo) && !el.dataset.animated) {
+          animateCounter(el, countTo, 2000);
+          el.dataset.animated = 'true';
+        }
+        observer.unobserve(el);
+      }
+    });
+  }, { threshold: 0.4 });
+
+  counters.forEach(c => obs.observe(c));
+});
+
+//counter of weeks and months
+
+document.addEventListener("DOMContentLoaded", () => {
+  const counters = document.querySelectorAll(".counter-num1");
+
+  function animateCounter(el, start, target, duration = 2000) {
+    const startTime = performance.now();
+
+    function step(now) {
+      const elapsed = now - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+      const value = Math.floor(progress * (target - start) + start);
+      el.textContent = value;
+      if (progress < 1) {
+        requestAnimationFrame(step);
+      } else {
+        el.textContent = target; // exact end
+      }
+    }
+    requestAnimationFrame(step);
+  }
+
+  // Trigger animation when visible
+  const observer = new IntersectionObserver((entries, obs) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const el = entry.target;
+        const start = parseInt(el.dataset.start, 10);
+        const target = parseInt(el.dataset.count, 10);
+        if (!isNaN(start) && !isNaN(target) && !el.dataset.animated) {
+          animateCounter(el, start, target, 2000);
+          el.dataset.animated = "true";
+        }
+        obs.unobserve(el);
+      }
+    });
+  }, { threshold: 0.5 });
+
+  counters.forEach(c => observer.observe(c));
 });
