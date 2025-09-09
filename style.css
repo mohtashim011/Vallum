@@ -424,8 +424,18 @@ padding: 20px 0px;
   /* display: flex;
   justify-content: center; */
   width: 100%;
-  
+  padding-top: 220px !important; 
+  padding-bottom: 120px !important;
 }
+
+@media (max-width: 425px) {
+.banner{
+  padding-top: 120px !important;
+  padding-bottom: 20px !important;
+}
+
+}
+
 .banner .container {
   max-width: 1320px; /* your desired content width */
   margin: 0 auto; /* center horizontally */
