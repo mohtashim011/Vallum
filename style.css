@@ -328,6 +328,7 @@ padding: 20px 0px;
   .menu-toggle {
   display: block;
 }
+
 .header-btn{
   display: none;
 }
@@ -409,6 +410,10 @@ padding: 20px 0px;
   align-items: center;
   width: 70%;
   margin: 0 auto;
+}
+.mobile-menu .header-btn2 {
+  color: #1A1A1A;
+  font-weight: 600;
 }
 
 /* Banner */
@@ -547,6 +552,7 @@ text-transform: uppercase;
 @media (max-width: 1024px) {
   .main-btn{
     font-size: 16px !important;
+        padding: 8.5px 26px;
   }
 }
 @media (max-width: 425px) {
@@ -1708,6 +1714,7 @@ margin: 0 auto;
 @media (max-width: 1024px) {
   .cta-main-btn{
     font-size: 16px !important;
+        padding: 8.5px 26px;
   }
   .cta-main
  {
@@ -1769,6 +1776,16 @@ margin: 0 auto;
   }
   .footer-bottom-p {
     font-size: 13px !important;}
+  }
+
+  @media (max-width: 424px) {
+.cta-btnn{
+        display: flex;
+    flex-direction: row;
+    width: 100%;
+    align-items: flex-start;
+}
+    
 }
 
 
