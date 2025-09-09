@@ -810,7 +810,7 @@ text-transform: uppercase;
 
 /* Position left/right */
 .carousel-btn.prev {
-  left: 90%;  /* adjust spacing */
+  left: 88%;  /* adjust spacing */
   display: flex;
   width: 50px;
   height: 50px;
@@ -829,10 +829,12 @@ text-transform: uppercase;
   align-items: center;
 }
 
-
+@media (max-width: 992px) {
+.carousel-btn.prev {
+    left: 80% !important;}}
 @media (max-width: 425px) {
 .carousel-btn.prev {
-    left: 78% !important;}
+    left: 75% !important;}
 
     .car-icon-box {
     width: 60% !important;
@@ -841,7 +843,7 @@ text-transform: uppercase;
 }
 @media (max-width: 321px) {
     .carousel-btn.prev {
-        left: 70% !important;
+        left: 65% !important;
     }
 }
 }
@@ -1522,6 +1524,19 @@ width: 45%;
 .process-p{
   font-size: 15px  !important;
 }
+.process-main {
+    background-color: rgb(245, 245, 245);
+    padding: 35px 40px;
+    border-radius: 42px;
+    width: 100%;
+    display: flex
+;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    gap: 80px;
+    margin-top: -280px;
+}
 }
 @media (max-width: 425px) {
 .process-main{
@@ -1727,9 +1742,9 @@ margin: 0 auto;
 }
 
 .cta-main-btn:hover {
-  color: #1A1A1A;
+  color: #000;
   background-color: transparent;
-  border-color: #1A1A1A;
+  border-color: #000;
 }
 .cta-main-btn:hover img {
   filter: invert(0); /* smooth transition to normal color */
@@ -2031,7 +2046,7 @@ margin: 0 auto;
 
 /* Initial state: hidden */
 .fade-in, .fade-in-up {
-  opacity: 0;
+  opacity: 1;
   transform: translateY(20px); /* only affects fade-in-up */
 }
 
