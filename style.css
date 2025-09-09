@@ -8,6 +8,11 @@ html {
 max-width: 1320px;
 margin: 0 auto;
 }
+@media (max-width: 425px) {
+  .container{
+    padding: 80px 20px  !important;
+  }
+}
 /* Better @font-face with fallbacks and swap */
 @font-face {
   font-family: "Youth";
@@ -630,6 +635,7 @@ border-radius: 20px;
  .prob{
 flex-direction: column;
 gap: 80px;
+padding-bottom: 180px !important;
 
   }
   .icon-box{
