@@ -152,3 +152,18 @@ window.addEventListener('scroll', () => {
   leftBtn.style.transform = `translateY(${progress * maxMove}px)`;   // down
   rightBtn.style.transform = `translateY(${-progress * maxMove}px)`; // up
 });
+
+
+
+
+//logo slider
+document.addEventListener("DOMContentLoaded", () => {
+  const track = document.querySelector(".slide-track");
+  if (track) {
+    const logos = [...track.children];
+    logos.forEach(logo => {
+      const clone = logo.cloneNode(true);
+      track.appendChild(clone);
+    });
+  }
+});

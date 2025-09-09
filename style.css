@@ -312,7 +312,7 @@ text-transform: uppercase;
   /* display: flex;
   justify-content: center; */
 }
-.text-gradient{
+/* .text-gradient{
   font-weight: 600;
     background: linear-gradient(
     50deg,
@@ -322,9 +322,38 @@ text-transform: uppercase;
     #C3F4FC 100%
   );
   -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent; /* makes text transparent so gradient shows */
-  background-clip: text; /* for other browsers */
+  -webkit-text-fill-color: transparent; 
+  background-clip: text; 
+} */
+
+/* Your gradient text with shine animation */
+.text-gradient {
+  font-weight: 600;
+  background: linear-gradient(
+    to right,
+    #F4F2EF 20%,
+    #ABD4DB 40%,
+    #5FC2EB 60%,
+    #669da5 80%,
+    #FFFFFF 90%   /* smooth fade to white */
+  );
+  background-size: 200% auto; /* needed for shine */
+
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-fill-color: transparent;
+
+  animation: shine 6s linear infinite; /* shine effect */
 }
+
+/* Shine animation */
+@keyframes shine {
+  to {
+    background-position: 200% center;
+  }
+}
+
 .banner-p{
   text-align: center;
   width: 40%;
@@ -348,8 +377,11 @@ text-transform: uppercase;
     #5FC2EB 71%,
     #C3F4FC 100%
   );
+  background-size: 200% auto; /* double width for sliding */
+  background-position:  center; /* start position */
+  
   border: none;
-  font-size: 18px ;
+  font-size: 18px;
   font-weight: 700;
   width: fit-content;
   color: #000;
@@ -363,8 +395,8 @@ text-transform: uppercase;
   text-decoration: none;
   line-height: 1em;
 
-  /* 👇 smooth & slow transition */
-  transition: background 1.8s ease-in-out ;
+  /* 👇 smooth movement */
+  transition: background-position 0.4s ease-in-out;
 }
 
 .main-btn img {
@@ -372,14 +404,9 @@ text-transform: uppercase;
 }
 
 .main-btn:hover {
-  background: linear-gradient(
-    150deg,
-    #81cef0 17%,
-    #F4F2EF 32%,
-    #5FC2EB 71%,
-    #ABD4DB 100%
-  );
+  background-position:  left center; /* slide gradient */
 }
+
 @media (max-width: 1024px) {
   .main-btn{
     font-size: 16px !important;
@@ -857,69 +884,59 @@ width: 100%;
 }
 
 /* Logo Slider */
-/* .logo-slider{
-  background-color: rgba(26, 26, 26, 1);
-  padding: 0;
-  overflow-x: visible;
-}
-.logo-text{
-  text-align: center;
-}
-.slider{
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  overflow-x: visible !important;
-} */
-
-/* Container */
+/* Logo Slider */
 .logo-slider {
   background-color: rgba(26, 26, 26, 1);
 }
-.logo-con{
+
+.logo-con {
   overflow: hidden;
-  overflow: hidden; /* hide overflow */
   padding: 40px 20px 120px 20px;
-  /* max-width: 1320px; */
   margin: 0 auto;
-  overflow-x: visible !important;
-   display: flex;
-    flex-direction: column;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   gap: 45px !important;
 }
+
 @media (max-width: 1024px) {
- .logo-con{
-          padding: 0px 20px 80px 20px;
-   gap: 45px !important;
- }
+  .logo-con {
+    padding: 0px 20px 80px 20px;
+    gap: 45px !important;
+  }
 }
 
-/* Slider track */
 .slider {
   overflow: hidden;
   position: relative;
   width: 100%;
 }
 
+/* Track with duplicated logos (JS will duplicate) */
 .slide-track {
   display: flex;
-  width: calc(250px * 12); /* width = logo width * number of logos */
+  width: max-content;
   animation: scroll 20s linear infinite;
 }
 
 .slide-track img {
-  width: 100%;
-  height: auto;
-  padding: 0 20px;
-  filter: brightness(0) invert(1); /* optional: make white logos */
+  height: 40px;
+  margin: 0 40px;
+  flex-shrink: 0;
+  filter: brightness(0) invert(1);
 }
 
-/* Keyframes for scrolling */
+.slider:hover .slide-track {
+  animation-play-state: paused;
+}
+
 @keyframes scroll {
   0%   { transform: translateX(0); }
   100% { transform: translateX(-50%); }
 }
+
+
+
 
 /* Success Stories */
 
@@ -1098,7 +1115,7 @@ text-align: center;
 }
 
 .work1-img,.work2-img,.work3-img {
-  border: 10px solid transparent;
+  /* border: 10px solid transparent; */
   border-radius: 42px;
   background: 
     linear-gradient(#fff, #fff) padding-box, 
@@ -1124,6 +1141,11 @@ text-align: center;
 .work-other3{
   display: flex;
   flex-direction: column-reverse;
+  gap: 30px;
+}
+.work-other2{
+  display: flex;
+  flex-direction: column;
   gap: 30px;
 }
 
@@ -1284,6 +1306,20 @@ text-align: center;
   gap: 32px;
   align-items: flex-start;
   justify-content: center;
+}
+
+
+@media (max-width: 1025px) {
+.about2{
+  flex-direction: column;
+  width: 100%;
+}
+.about1{
+  width: 90%;
+}
+.about2-text{
+  width: 100%;
+}
 }
 .about2-text h4{
   color: #fff;
