@@ -816,7 +816,7 @@ text-transform: uppercase;
 /* Tablet */
 @media (max-width: 992px) {
   .carousel-btn.prev {
-    left: 84% !important;
+    left: 80% !important;
   }
 }
 
