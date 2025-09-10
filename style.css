@@ -694,124 +694,117 @@ font-weight: 700;
 line-height: 1.51em;
 text-transform: uppercase;
 }
-.prob-carousal{
+/* Carousel container */
+.prob-carousal {
   width: 60%;
   display: flex;
   flex-direction: column;
   gap: 60px;
 }
-.car-icon-box{
- width: 45%;
- height: auto;
-  padding: 36px 40px;
-  background: rgba(255, 255, 255, 0.09); /* semi-transparent */
-  backdrop-filter: blur(134px);          /* applies blur behind */
-  -webkit-backdrop-filter: blur(10px);  /* for Safari */
-  border-radius: 16px;
 
-  color: #fff;
-    border: 0.88px solid; /* set width */
-  border-color: linear-gradient(
-    180deg, 
-    rgba(60, 225, 200, 1), 
-    rgba(60, 225, 200, 1)
-  ) 1;
-  border-radius: 16px; /* works with border-image too */
-
-}
-.car-icon-box-inner{
-  display: flex;
-  flex-direction: column;
-  justify-content: left;
-  gap: 0px;
-}
-.car-icon-box-inner span{
-  font-size: 25px;
-  font-weight: 700;
-  line-height: 1.51em;
-}
-.car-icon-box-inner p{
-  font-size: 18.5px;
-  font-weight: 400;
-  line-height: 1.4em;
-}
-.car-icon-box-inner-img{
-  width: 60px;
-  margin-bottom: 40px;
-}
+/* Horizontal scroll area */
 .icon-box {
-  /* background-image: url("/img/bg-car.png"); */
-    display: flex;
+  display: flex;
   flex-direction: row;
   gap: 20px;
-  gap: 20px;
-  overflow-x: auto;         /* allow horizontal scroll */
-  scroll-snap-type: x mandatory; /* snapping behavior */
-  -webkit-overflow-scrolling: touch; /* smooth scroll on mobile */
+  overflow-x: hidden;            /* hide scrollbar */
+  scroll-behavior: smooth;       /* smooth transitions */
+  scroll-snap-type: x mandatory; /* snapping on items */
+  -webkit-overflow-scrolling: touch;
   padding-bottom: 10px;
   cursor: grab;
 }
 
 .icon-box:active {
-   cursor: grabbing;
-  cursor: -webkit-grabbing;
-}
-.no-select {
-  user-select: none !important;
+  cursor: grabbing;
 }
 
-
+/* Single card */
 .car-icon-box {
-  flex: 0 0 auto;           /* prevents shrinking */
-  
-  scroll-snap-align: start; /* snap point */
+  flex: 0 0 auto;           /* fixed width, no shrink */
+  width: 45%;
+  padding: 36px 40px;
+  background: rgba(255, 255, 255, 0.09);
+  backdrop-filter: blur(134px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 16px;
+  color: #fff;
+  border: 0.88px solid rgba(60, 225, 200, 1);
+  scroll-snap-align: start;
 }
+
+.car-icon-box-inner {
+  display: flex;
+  flex-direction: column;
+  justify-content: left;
+  gap: 0px;
+}
+
+.car-icon-box-inner span {
+  font-size: 25px;
+  font-weight: 700;
+  line-height: 1.51em;
+}
+
+.car-icon-box-inner p {
+  font-size: 18.5px;
+  font-weight: 400;
+  line-height: 1.4em;
+}
+
+.car-icon-box-inner-img {
+  width: 60px;
+  margin-bottom: 40px;
+}
+
+/* Hide scrollbars */
 .icon-box::-webkit-scrollbar {
-  height: 8px; /* horizontal scrollbar height */
   display: none !important;
 }
-
-.icon-box::-webkit-scrollbar-track {
-  background: rgba(217, 217, 217, 0.15); /* background bar */
-  border-radius: 10px;
+.icon-box {
+  -ms-overflow-style: none;  /* IE/Edge */
+  scrollbar-width: none;     /* Firefox */
 }
 
-.icon-box::-webkit-scrollbar-thumb {
-  background: rgba(217, 217, 217, 1); /* scroll bar color */
-  border-radius: 10px;
-}
-
-.icon-box::-webkit-scrollbar-button {
-  display: none; /* removes arrows at ends */
-}
-/* //carousal button styling */
-/* Make parent relative */
-.icon-box-wrapper {
-  position: relative;
-}
-
-/* Buttons float */
+/* Buttons */
 .carousel-btn {
   position: absolute;
-  top: 110%;
+  top: 50%;
   transform: translateY(-50%);
-  background: none;
+  background: transparent;
   color: #ffffff;
   border: none;
-  padding: 10px 16px;
   cursor: pointer;
-  font-size: 22px;
+  font-size: 40px;
   border-radius: 50%;
-  transition: background 0.3s ease;
+  width: 50px;
+  height: 50px;
+  line-height: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   z-index: 10;
-      justify-content: center;
-    align-items: center;
+  transition: background 0.3s ease;
 }
 
+/* .carousel-btn:hover {
+  background: rgba(255, 255, 255, 0.25);
+} */
 /* Position left/right */
 .carousel-btn.prev {
-  left: 88%;  /* adjust spacing */
+  left: 88%; /* adjust spacing */
+  top: 110%;
   display: flex;
+  width: 50px;
+  height: 50px;
+  font-size: 50px;
+  justify-content: center;
+  align-items: center;
+}
+
+.carousel-btn.next {
+  right: 0%; /* adjust spacing */
+  top: 110%;
   width: 50px;
   height: 50px;
   font-size: 50px;
@@ -819,41 +812,32 @@ text-transform: uppercase;
   justify-content: center;
   align-items: center;
 }
-.carousel-btn.next {
-  right: 0%; /* adjust spacing */
-    width: 50px;
-  height: 50px;
-  font-size: 50px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+
+/* Tablet */
+@media (max-width: 992px) {
+  .carousel-btn.prev {
+    left: 82% !important;
+  }
 }
 
-@media (max-width: 992px) {
-.carousel-btn.prev {
-    left: 80% !important;}}
+/* Mobile */
 @media (max-width: 425px) {
-.carousel-btn.prev {
-    left: 75% !important;}
-
-    .car-icon-box {
+  .carousel-btn.prev {
+    left: 75% !important;
+  }
+  .car-icon-box {
     width: 60% !important;
     padding: 30px 25px;
-  
+  }
 }
+
+/* Small devices */
 @media (max-width: 321px) {
-    .carousel-btn.prev {
-        left: 65% !important;
-    }
+  .carousel-btn.prev {
+    left: 65% !important;
+  }
 }
-}
-/* For Firefox */
-.icon-box {
-    scrollbar-width: none; /* Firefox */
-  -ms-overflow-style: none; /* IE/Edge */
-  /* scrollbar-width: thin;
-  scrollbar-color: rgba(217, 217, 217, 1) rgba(217, 217, 217, 0.15); */
-}
+
 
 /* Feature */
 .fea-main{

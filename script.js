@@ -214,8 +214,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 
-// for carousal movement 
-
+// for Problem section carousal movement 
 document.addEventListener("DOMContentLoaded", function () {
   const carousel = document.querySelector(".icon-box");
 
@@ -228,22 +227,59 @@ document.addEventListener("DOMContentLoaded", function () {
   nextBtn.innerHTML = "›";
   nextBtn.className = "carousel-btn next";
 
-  // Insert into DOM
+  // Insert buttons
+  carousel.parentNode.style.position = "relative";
   carousel.parentNode.insertBefore(prevBtn, carousel);
   carousel.parentNode.appendChild(nextBtn);
 
-  // Get one card width (including gap)
+  // Card width
   const cardWidth = carousel.querySelector(".car-icon-box").offsetWidth + 20;
 
-  // Add listeners
+  // Scroll on click
   nextBtn.addEventListener("click", () => {
     carousel.scrollBy({ left: cardWidth, behavior: "smooth" });
   });
   prevBtn.addEventListener("click", () => {
     carousel.scrollBy({ left: -cardWidth, behavior: "smooth" });
   });
-});
 
+  // 👉 Swipe/drag support
+  let isDown = false;
+  let startX;
+  let scrollLeft;
+
+  carousel.addEventListener("mousedown", (e) => {
+    isDown = true;
+    startX = e.pageX - carousel.offsetLeft;
+    scrollLeft = carousel.scrollLeft;
+  });
+
+  carousel.addEventListener("mouseleave", () => (isDown = false));
+  carousel.addEventListener("mouseup", () => (isDown = false));
+
+  carousel.addEventListener("mousemove", (e) => {
+    if (!isDown) return;
+    e.preventDefault();
+    const x = e.pageX - carousel.offsetLeft;
+    const walk = (x - startX) * 1.5;
+    carousel.scrollLeft = scrollLeft - walk;
+  });
+
+  // Touch support
+  let touchStartX = 0;
+  let touchScrollLeft = 0;
+
+  carousel.addEventListener("touchstart", (e) => {
+    touchStartX = e.touches[0].pageX;
+    touchScrollLeft = carousel.scrollLeft;
+  });
+
+  carousel.addEventListener("touchmove", (e) => {
+    const touchX = e.touches[0].pageX;
+    const move = (touchX - touchStartX) * 1.5;
+    carousel.scrollLeft = touchScrollLeft - move;
+  });
+});
 
 
 //counter
