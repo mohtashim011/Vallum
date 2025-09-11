@@ -2066,11 +2066,13 @@ margin: 0 auto;
 }
 
 /* Initial state: hidden */
-.fade-in, .fade-in-up {
-  opacity: 1;
+.fade-in{
+  opacity: 0;
   transform: translateY(20px); /* only affects fade-in-up */
 }
-
+.fade-in-up {
+  opacity: 1;
+}
 /* Active state triggers animation */
 .fade-in.active {
   animation: fadeIn 1.5s ease forwards;
